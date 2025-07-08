@@ -303,6 +303,36 @@
 
    
     </script>
+    <script>
+  const counterRef = db.collection("visits").doc("main");
+
+  function updateCounter() {
+    // Check if already counted this session
+    if (!sessionStorage.getItem("visitorCounted")) {
+      counterRef.get().then((doc) => {
+        let newCount = 1;
+        if (doc.exists) {
+          newCount = doc.data().count + 1;
+        }
+        counterRef.set({ count: newCount });
+        document.getElementById("visitor-counter").textContent = newCount;
+
+        // Mark session as counted
+        sessionStorage.setItem("visitorCounted", "true");
+      });
+    } else {
+      // Already counted, just display count
+      counterRef.get().then((doc) => {
+        if (doc.exists) {
+          document.getElementById("visitor-counter").textContent = doc.data().count;
+        }
+      });
+    }
+  }
+
+  updateCounter();
+</script>
+
     <script src="fire.js"></script>
   </body>
 </html>
