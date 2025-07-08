@@ -185,6 +185,18 @@
       }
     </style>
   </head>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "YOUR_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT",
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
 
   <body>
     <div class="page-wrapper">
@@ -289,15 +301,7 @@
         musicPlayerDrawer.classList.remove('open');
       }
 
-      // Visitor Counter
-      fetch('https://api.countapi.xyz/hit/maruya-official/visits')
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById('footer-visitor-count').textContent = `👁️ Visitors: ${data.value.toLocaleString()}`;
-        })
-        .catch(() => {
-          document.getElementById('footer-visitor-count').textContent = '👁️ Visitors: unavailable';
-        });
+   
     </script>
     <script src="fire.js"></script>
   </body>
